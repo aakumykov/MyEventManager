@@ -60,4 +60,8 @@ export class LoginPage {
 		}
 	}
 
+
+	goToSignup(): void { this.navCtrl.push('signup'); }
+	
+	goToResetPassword(): void { this.navCtrl.push('reset-password'); }
 }
