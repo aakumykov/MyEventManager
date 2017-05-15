@@ -1,48 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-
 import firebase from 'firebase';
 
 @Injectable()
 export class AuthProvider {
+  constructor() {}
 
-	constructor(public http: Http) {
-		console.info('AuthProvider.constructor()');
-	}
+  loginUser(email: string, password: string): firebase.Promise<any> {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
 
+  signupUser(email: string, password: string): firebase.Promise<any> {
+    return firebase.auth().createUserWithEmailAndPassword(email, password).then((newUser) => {
+      firebase.database().ref('/userProfile').child(newUser.uid).set({
+        email: email
+      });
+    });
+  }
 
-	signupUser(email: string, password: string): firebase.Promise<any> {
-		return firebase.auth().createUserWithEmailAndPassword(email, password)
-			.then( newUser => {
-				firebase.database().ref('userProfile').child(newUser.uid)
-					.set({ email: email });
-			});
-	}
+  resetPassword(email: string): firebase.Promise<void> {
+    return firebase.auth().sendPasswordResetEmail(email);
+  }
 
-
-	loginUser(email: string, password: string): firebase.Promise<any> {
-		// console.info('AuthProvider.loginUser()');
-		return firebase.auth().signInWithEmailAndPassword(email, password)
-			.then( () => {
-				console.info('ОБЕЩАЛ ЗАЙТИ');
-			});
-	}
-
-
-	resetPassword(email: string): firebase.Promise<void> {
-		return firebase.auth().sendPasswordResetEmail(email)
-			.then( () => {
-				console.info('ОБЕЩАЛ ВСПОМНИТЬ');
-			});
-	}
-
-
-	logoutUser(): firebase.Promise<void> {
-		return firebase.auth().signOut()
-			.then( () => {
-				console.info('ОБЕЩАЛ УЙТИ');
-			});
-	}
-
+  logoutUser(): firebase.Promise<void> {
+    firebase.database().ref('/userProfile').child(firebase.auth().currentUser.uid).off();
+    return firebase.auth().signOut();
+  }
 }

@@ -12,9 +12,11 @@ import firebase from 'firebase';
 })
 export class MyApp {
 	rootPage: any;
-	zone: NgZone = new NgZone({});
+	zone: NgZone;
 
 	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+		this.zone = new NgZone({});
+
 		platform.ready().then(() => {
 			statusBar.styleDefault();
 			splashScreen.hide();
@@ -29,17 +31,17 @@ export class MyApp {
 			messagingSenderId: "861656768051"
 		});
 
-		const unsubscribe = firebase.auth().onAuthStateChanged( (user) => {
-			this.zone.run( () => {
-				if (!user) {
-					this.rootPage = 'login';
-					unsubscribe();
-				} else {
-					this.rootPage = HomePage;
-					unsubscribe();
-				}
-			})
-		});
+		const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+	      this.zone.run( () => {
+	        if (!user) {
+	          this.rootPage = 'login';
+	          unsubscribe();
+	        } else { 
+	          this.rootPage = HomePage;
+	          unsubscribe();
+	        }
+	      });     
+	    });
 
 		
 	}
