@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { AuthProvider } from '../providers/auth/auth';
 import { EventProvider } from '../providers/event/event';
 import { ProfileProvider } from '../providers/profile/profile';
@@ -23,7 +22,6 @@ class CameraMock extends Camera {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +30,6 @@ class CameraMock extends Camera {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
   ],
   providers: [
     StatusBar,

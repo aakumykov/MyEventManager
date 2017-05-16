@@ -3,11 +3,11 @@
     <ion-title>
       Книга событий
     </ion-title>
-	<ion-buttons end>
-		<button ion-button icon-only (click)="goToProfile()" title="Профиль пользователя">
-			<ion-icon name="person"></ion-icon>
-		</button>
-	</ion-buttons>
+    <ion-buttons end>
+    	<button ion-button icon-only (click)="goToProfile()" title="Профиль пользователя">
+    		<ion-icon name="person"></ion-icon>
+    	</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -17,12 +17,8 @@
     Если запутался, почитай <a href="http://ionicframework.com/docs/v2">документацию</a>.
   </p>
 
-  <button ion-button block color="primary" (click)="goToCreate()">
-    Создать событие
-  </button>
-  <button ion-button block color="secondary" (click)="goToList()">
-    Список событий
-  </button>
-
+  <button ion-button block color="primary" (click)="goToList()">Список событий</button>
+  
+  <button ion-button block color="secondary" (click)="goToCreate()">Создать событие</button>
 
 </ion-content>

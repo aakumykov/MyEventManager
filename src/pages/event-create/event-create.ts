@@ -22,7 +22,7 @@ export class EventCreatePage {
 	) {
 		this.eventProvider.createEvent(eventName, eventDate, eventPrice, eventCost)
 		.then( newEvent => {
-			this.navCtrl.pop();
+			this.navCtrl.setRoot('event-list');
 		});
 	}
 
