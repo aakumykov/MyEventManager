@@ -57,7 +57,19 @@ export class ProfilePage {
         {
           text: 'Сохранить',
           handler: data => {
-            this.profileProvider.updateName(data.firstName, data.lastName);
+            let firstName = data.firstName;
+            let lastName = data.lastName;
+            
+            this.profileProvider.updateName(data.firstName, data.lastName)
+            .then( data => {
+              console.info('----- *** updateName(), data: -----');
+              console.info('firstName: '+firstName);
+              console.info('lastName: '+lastName);
+              console.info('-------------------------------');
+
+              this.userProfile.firstName = firstName;
+              this.userProfile.lastName = lastName;
+            });
           }
         }
       ]

@@ -20,9 +20,9 @@ export class ProfileProvider {
 					console.info(data);
 					console.info('---------------------------------------------------');
 
-					console.info('----- ProfileProvider, getUserProfile(), data.val() -----');
-					console.info(data.val());
-					console.info('---------------------------------------------------------');
+					// console.info('----- ProfileProvider, getUserProfile(), data.val() -----');
+					// console.info(data.val());
+					// console.info('---------------------------------------------------------');
 
 					resolve(data.val());
 				});
@@ -30,6 +30,8 @@ export class ProfileProvider {
 	}
 
 	updateName(firstName: string, lastName: string): firebase.Promise<any> {
+		console.info('ProfilePage.updateName()');
+
 		return firebase.database()
 			.ref('/userProfile')
 			.child(firebase.auth().currentUser.uid)
@@ -37,6 +39,16 @@ export class ProfileProvider {
 				firstName: firstName, 
 				lastName: lastName,
 			});
+
+		// return new Promise ((resolve, reject) => {
+		// 	firebase.database()
+		// 		.ref('/userProfile')
+		// 		.child(firebase.auth().currentUser.uid)
+		// 		.update({
+		// 			firstName: firstName, 
+		// 			lastName: lastName,
+		// 		});
+		// });
 	}
 
 	updateDOB(birthDate: string): firebase.Promise<any> {
