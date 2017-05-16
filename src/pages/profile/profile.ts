@@ -62,11 +62,6 @@ export class ProfilePage {
             
             this.profileProvider.updateName(data.firstName, data.lastName)
             .then( data => {
-              console.info('----- *** updateName(), data: -----');
-              console.info('firstName: '+firstName);
-              console.info('lastName: '+lastName);
-              console.info('-------------------------------');
-
               this.userProfile.firstName = firstName;
               this.userProfile.lastName = lastName;
             });
@@ -101,7 +96,13 @@ export class ProfilePage {
         {
           text: 'Сохранить',
           handler: data => {
-            this.profileProvider.updateEmail(data.newEmail, data.password);
+            let newEmail = data.newEmail;
+
+            this.profileProvider.updateEmail(data.newEmail, data.password).then( () =>{
+              this.userProfile.email = newEmail;
+            }).catch(error => {
+              console.log('ОШИБКА: '+error.message);
+            });
           }
         }
       ]
