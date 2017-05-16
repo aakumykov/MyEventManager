@@ -10,6 +10,7 @@ import { AuthProvider } from '../../providers/auth/auth';
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
+
 export class ProfilePage {
   public userProfile: any;
   public birthDate: string;
@@ -21,6 +22,10 @@ export class ProfilePage {
     this.profileProvider.getUserProfile().then( profileSnap => {
       this.userProfile = profileSnap;
       this.birthDate = this.userProfile.birthDate;
+
+      console.info('----- ProfilePage, ionViewDidEnter, profileSnap -----');
+      console.info(profileSnap);
+      console.info('-----------------------------------------------------');
     });
   }
 
@@ -32,25 +37,25 @@ export class ProfilePage {
 
   updateName(){
     let alert = this.alertCtrl.create({
-      message: "Your first name & last name",
+      message: "Ваши имя и фамилия",
       inputs: [
         {
           name: 'firstName',
-          placeholder: 'Your first name',
+          placeholder: 'Имя',
           value: this.userProfile.firstName
         },
         {
           name: 'lastName',
-          placeholder: 'Your last name',
+          placeholder: 'Фамилия',
           value: this.userProfile.lastName
         },
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Отмена',
         },
         {
-          text: 'Save',
+          text: 'Сохранить',
           handler: data => {
             this.profileProvider.updateName(data.firstName, data.lastName);
           }
@@ -69,20 +74,20 @@ export class ProfilePage {
       inputs: [
         {
           name: 'newEmail',
-          placeholder: 'Your new email',
+          placeholder: 'Новый e-mail',
         },
         {
           name: 'password',
-          placeholder: 'Your password',
+          placeholder: 'Ваш пароль',
           type: 'password'
         },
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Отмена',
         },
         {
-          text: 'Save',
+          text: 'Сохранить',
           handler: data => {
             this.profileProvider.updateEmail(data.newEmail, data.password);
           }
@@ -97,21 +102,21 @@ export class ProfilePage {
       inputs: [
         {
           name: 'newPassword',
-          placeholder: 'Your new password',
+          placeholder: 'Старый пароль',
           type: 'password'
         },
         {
           name: 'oldPassword',
-          placeholder: 'Your old password',
+          placeholder: 'Новый пароль',
           type: 'password'
         },
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Отмена',
         },
         {
-          text: 'Save',
+          text: 'Сохранить',
           handler: data => {
             this.profileProvider.updatePassword(data.newPassword, data.oldPassword);
           }

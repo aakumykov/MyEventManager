@@ -16,13 +16,13 @@ export class ProfileProvider {
 				.child(firebase.auth().currentUser.uid)
 				.on('value', data => {
 
-					console.info('----- data -----');
+					console.info('----- ProfileProvider, getUserProfile(), data -----');
 					console.info(data);
-					console.info('----------------');
+					console.info('---------------------------------------------------');
 
-					console.info('----- data.val() -----');
+					console.info('----- ProfileProvider, getUserProfile(), data.val() -----');
 					console.info(data.val());
-					console.info('----------------');
+					console.info('---------------------------------------------------------');
 
 					resolve(data.val());
 				});
