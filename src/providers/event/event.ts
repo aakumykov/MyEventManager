@@ -73,6 +73,26 @@ export class EventProvider {
 						event.revenue += eventPrice;
 						return event;
 					});
+
+				if (guestPicture != null) {
+					firebase.storage()
+						.ref('/guestProfile/')
+						.child(newGuest.key)
+						.child('profilePicture.png')
+						.putString(
+							guestPicture, 
+							'base64', 
+							{contentType: 'image/png'}
+						).then((savedPicture) => {
+							firebase.database()
+								.ref(`userProfile/${firebase.auth().currentUser.uid}/eventList`)
+								.child(eventId)
+								.child('guestList')
+								.child(newGuest.key)
+								.child('profilePicture')
+								.set(savedPicture.downloadURL);
+							});
+				}
 			});
 	}
 
