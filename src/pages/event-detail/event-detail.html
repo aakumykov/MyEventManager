@@ -5,12 +5,38 @@
 </ion-header>
 
 <ion-content>
+
+	<ion-row padding>
+		<ion-col col-8>Текущая стоимость</ion-col>
+		<ion-col col-4 
+			[class.profitable]="currentEvent?.revenue > 0"
+			[class.no-profit]="currentEvent?.revenue < 0"
+		>
+			{{currentEvent?.revenue}}
+		</ion-col>
+	</ion-row>
+
 	<ion-card>
 		<ion-card-header>{{currentEvent?.name}}</ion-card-header>
-	
 		<ion-card-content>
 			<p>Что: <strong>${{currentEvent?.price}}</strong></p>
 			<p>Когда: <strong>{{currentEvent?.date}}</strong></p>
 		</ion-card-content>
 	</ion-card>
+
+	<ion-card class="add-guest-form">
+		<ion-card-header>Добавить гостя</ion-card-header>
+		<ion-card-content>
+			<ion-list no-lines>
+				<ion-item>
+					<ion-label stacked>Имя</ion-label>
+					<ion-input [(ngModel)]="guestName" type="text"
+					placeholder="Как зовут вашего гостя?"></ion-input>
+				</ion-item>
+				<button ion-button color="primary" block 
+				(click)="addGuest(guestName)">Добавить</button>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+
 </ion-content>
