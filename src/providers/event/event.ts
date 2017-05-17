@@ -58,12 +58,21 @@ export class EventProvider {
 		});
 	}
 
-	addGuest(guestName: string, eventId: string, eventPrice: number): firebase.Promise<any> {
+	addGuest(guestName: string, eventId: string, eventPrice: number, guestPicture = null): firebase.Promise<any> {
 		return firebase.database()
 			.ref(`userProfile/${firebase.auth().currentUser.uid}/eventList`)
 			.child(eventId)
 			.child('guestList').push({
 				guestName: guestName
+			})
+			.then( newGuest => {
+				firebase.database()
+					.ref(`userProfile/${firebase.auth().currentUser.uid}/eventList`)
+					.child(eventId)
+					.transaction( event => {
+						event.revenue += eventPrice;
+						return event;
+					});
 			});
 	}
 
