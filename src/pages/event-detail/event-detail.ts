@@ -45,6 +45,8 @@ export class EventDetailPage {
 	}
 
 	takePicture(){
+		console.info('EventDetailPage.takePicture()');
+
 		this.cameraPlugin.getPicture({
 			quality : 95,
 			destinationType : this.cameraPlugin.DestinationType.DATA_URL,
@@ -56,6 +58,9 @@ export class EventDetailPage {
 			saveToPhotoAlbum: true
 		}).then(
 			imageData => {
+				console.info('----- imageData.length() ---');
+				console.info('('+imageData.length+') '+imageData);
+				console.info('----------------------------');
 				this.guestPicture = imageData;
 			},
 			error => {
@@ -64,5 +69,5 @@ export class EventDetailPage {
 		);
 	}
 
-	
+
 }

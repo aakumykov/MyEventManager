@@ -27,6 +27,6 @@ export class EventListPage {
 	}
 
 	goHome(){
-		this.navCtrl.push('home');
+		this.navCtrl.setRoot('home');
 	}
 }
