@@ -14,6 +14,8 @@ import { EventProvider } from '../../providers/event/event';
 
 export class EventDetailPage {
 	public currentEvent: any;
+	public guestName: string;
+	// public guestPicture: any;
 
 	constructor(
 		public navCtrl: NavController, 
@@ -28,5 +30,14 @@ export class EventDetailPage {
 			});
 	}
 
-	
+	addGuest(guestName) {
+		this.eventProvider.addGuest(
+			guestName, 
+			this.currentEvent.id, 
+			this.currentEvent.price, 
+			// this.guestPicture
+		).then(() => { 
+			this.guestName = ''; 
+		});
+	}
 }
