@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Device } from '@ionic-native/device';
 
 import firebase from 'firebase';
 
@@ -12,12 +13,13 @@ export class MyApp {
 	rootPage: any;
 	zone: NgZone;
 
-	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, device: Device) {
 		this.zone = new NgZone({});
 
 		platform.ready().then(() => {
 			statusBar.styleDefault();
 			splashScreen.hide();
+			console.info(device.model+', '+device.platform);
 		});
 
 		firebase.initializeApp({

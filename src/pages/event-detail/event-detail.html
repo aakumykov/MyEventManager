@@ -25,16 +25,23 @@
 	</ion-card>
 
 	<ion-card class="add-guest-form">
-		<ion-card-header>Добавить гостя</ion-card-header>
+		<ion-card-header>Приглашение гостей</ion-card-header>
+
+		<ion-item *ngIf="guestPicture">Фото сделано!</ion-item>
+		
 		<ion-card-content>
 			<ion-list no-lines>
-				<ion-item>
-					<ion-label stacked>Имя</ion-label>
-					<ion-input [(ngModel)]="guestName" type="text"
-					placeholder="Как зовут вашего гостя?"></ion-input>
-				</ion-item>
-				<button ion-button color="primary" block 
-				(click)="addGuest(guestName)">Добавить</button>
+				<ion-row>
+					<ion-col col-9>
+						<ion-label stacked>Имя</ion-label>
+						<ion-input [(ngModel)]="guestName" type="text" placeholder="Как зовут вашего гостя?"></ion-input>
+					</ion-col>
+					<ion-col col-3>
+						<img *ngIf="guestPicture" alt='фото гостя' class='guest_photo' [src]="guestPicture">
+					</ion-col>
+				</ion-row>
+				<button ion-button block (click)="takePicture()">Добавить фото</button>
+				<button ion-button color="primary" block (click)="addGuest(guestName)">Пригласить</button>
 			</ion-list>
 		</ion-card-content>
 	</ion-card>
